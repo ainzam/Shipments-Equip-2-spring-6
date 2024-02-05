@@ -1,53 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://wwww.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="https://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="head">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../static/css/main.css" />
-<title th:text="#{template.head.title}">Title</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../../static/css/main.css" />
+	<title th:text="#{template.head.title}">Title</title>
 </head>
 
 <body>
 	<div class="container">
-		<header class="mt-4 p-5 bg-light bg-gradient rounded"
-			th:fragment="header">
+		<header class="mt-4 p-5 bg-light bg-gradient rounded" th:fragment="header">
 			<h1 th:text="#{template.header.title}">Header title</h1>
 			<p th:text="#{template.header.subtitle}">Header subtitle</p>
 		</header>
 
 		<!-- #ctx.springRequestContext.requestUri -->
 
-		<nav
-			class="navbar navbar-expand-lg sticky-top bg-light bg-gradient rounded my-1"
-			th:fragment="navbar">
+		<nav class="navbar navbar-expand-lg sticky-top bg-light bg-gradient rounded my-1" th:fragment="navbar">
 			<div class="container-fluid">
 				<ul class="navbar-nav">
 
 					<li class="navbar-brand" sec:authorize="isAuthenticated()">
-						<i class="bi bi-person-fill-down"
-							sec:authorize="hasAnyRole('RECEPTIONIST')"></i>
-						<i class="bi bi-person-fill"
-							sec:authorize="hasAnyRole('LOGISTICS_MANAGER')"></i>
-						<i class="bi bi-person-fill-up"
-							sec:authorize="hasAnyRole('COURIER')"></i>
+						<i class="bi bi-person-fill-down" sec:authorize="hasAnyRole('RECEPTIONIST')"></i>
+						<i class="bi bi-person-fill" sec:authorize="hasAnyRole('LOGISTICS_MANAGER')"></i>
+						<i class="bi bi-person-fill-up" sec:authorize="hasAnyRole('COURIER')"></i>
 						<span sec:authentication="name">username</span>
 					</li>
 
 					<li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-						<a class="nav-link dropdown-toggle" href="#"
-							data-bs-toggle="dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
 							<i class="bi bi-list-ol"></i>
 							<span th:text="#{template.navbar.shipments}">shipments</span>
 						</a>
@@ -75,8 +62,7 @@
 						</ul>
 					</li>
 					<li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-						<a class="nav-link dropdown-toggle" href="#"
-							data-bs-toggle="dropdown">
+						<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
 							<i class="bi bi-list-ol"></i>
 							<span th:text="#{template.navbar.users}">users</span>
 						</a>
@@ -105,8 +91,7 @@
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-							role="button" href="#">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" href="#">
 							<i class="bi bi-flag"></i>
 							<span th:text="#{template.navbar.language}">language </span>
 						</a>

@@ -1,36 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://wwww.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="https://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/template :: head}">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../static/css/main.css" />
-<title>New shipment</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" />
+	<title>New shipment</title>
 </head>
+
 <body>
 	<section class="container">
 		<header class="jumbotron" th:replace="~{fragments/template :: header}">
 			Shipments Header </header>
 
-		<nav class="navbar navbar-default"
-			th:replace="~{fragments/template :: navbar}">Navbar</nav>
+		<nav class="navbar navbar-default" th:replace="~{fragments/template :: navbar}">Navbar</nav>
 
-		<section class="card my-1"
-			th:replace="~{fragments/template :: heading}">Heading</section>
+		<section class="card my-1" th:replace="~{fragments/template :: heading}">Heading</section>
 
 		TODO - Shipment form
 	</section>
 
 </body>
+
 </html>

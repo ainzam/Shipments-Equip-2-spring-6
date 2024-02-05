@@ -1,29 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://wwww.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="https://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../static/css/main.css" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../../static/css/main.css" />
 
-<title>Dialogs</title>
+	<title>Dialogs</title>
 </head>
 
 <body>
 	<!-- Remove user dialog -->
-	<button type="button" class="btn btn-danger" data-bs-toggle="modal"
-		data-bs-target="#removeUserDialog" data-bs-username="username">Remove
+	<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeUserDialog"
+		data-bs-username="username">Remove
 		user dialog</button>
 
 	<div th:fragment="remove_user_dialog">
@@ -45,8 +39,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-light"
-							data-bs-dismiss="modal"
+						<button type="button" class="btn btn-light" data-bs-dismiss="modal"
 							th:text="#{dialogs.user.remove.cancel.button}">Cancel</button>
 						<a class="btn btn-danger" href="#">
 							<i class="bi bi-x-circle"> </i>
@@ -71,29 +64,29 @@
 		<script>
 			const removeUserDialog = document.getElementById('removeUserDialog')
 			if (removeUserDialog) {
-			  removeUserDialog.addEventListener('show.bs.modal', event => {
-			    // Button that triggered the modal
-			    const button = event.relatedTarget
-			    // Extract info from data-bs-* attributes
-			    const username = button.getAttribute('data-bs-username')
-			    // If necessary, you could initiate an Ajax request here
-			    // and then do the updating in a callback.
-	
-			    // Update the modal's content.
-			    const modalBodyMessage = removeUserDialog.querySelector('.modal-body p')
-			    const modalFooterUrl = removeUserDialog.querySelector('.modal-footer a')
-	
-			    modalBodyMessage.innerHTML = removeDialogMsg.replace('{0}', username)
-			    modalFooterUrl.href = removeDialogUrl.replace('{username}', username)
-			  })
+				removeUserDialog.addEventListener('show.bs.modal', event => {
+					// Button that triggered the modal
+					const button = event.relatedTarget
+					// Extract info from data-bs-* attributes
+					const username = button.getAttribute('data-bs-username')
+					// If necessary, you could initiate an Ajax request here
+					// and then do the updating in a callback.
+
+					// Update the modal's content.
+					const modalBodyMessage = removeUserDialog.querySelector('.modal-body p')
+					const modalFooterUrl = removeUserDialog.querySelector('.modal-footer a')
+
+					modalBodyMessage.innerHTML = removeDialogMsg.replace('{0}', username)
+					modalFooterUrl.href = removeDialogUrl.replace('{username}', username)
+				})
 			}
 		</script>
 
 	</div>
 
 	<!-- Assign shipment dialog -->
-	<button type="button" class="btn btn-warning" data-bs-toggle="modal"
-		data-bs-target="#assignShipmentDialog" data-bs-shipmentId="1">Assign
+	<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#assignShipmentDialog"
+		data-bs-shipmentId="1">Assign
 		shipment dialog</button>
 
 	<div th:fragment="assign_shipment_dialog">
@@ -102,19 +95,16 @@
 
 			<div class="modal-dialog">
 
-				<form action="#" th:action="@{/shipments/assign}" method="post"
-					th:object="${assignment}">
+				<form action="#" th:action="@{/shipments/assign}" method="post" th:object="${assignment}">
 
 					<div class="modal-content">
 
 						<div class="modal-header" style="padding: 35px 50px;">
-							<h4 class="modal-title"
-								th:utext="#{dialogs.shipment.assign.title}">Assign</h4>
+							<h4 class="modal-title" th:utext="#{dialogs.shipment.assign.title}">Assign</h4>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 						</div>
 
-						<div class="modal-body form-horizontal"
-							style="padding: 40px 50px;">
+						<div class="modal-body form-horizontal" style="padding: 40px 50px;">
 							<input type="hidden" th:field="*{performer}" />
 							<input id="shipmentId" type="hidden" th:field="*{shipmentId}" />
 
@@ -124,8 +114,8 @@
 								<div class="g-2 col-md-7">
 									<select id="courier" th:field="*{courier}" class="form-select"
 										th:errorclass="'is-invalid'">
-										<option th:each="courier : ${couriers}"
-											th:value="${courier.username}" th:text="${courier.fullName}">Genís
+										<option th:each="courier : ${couriers}" th:value="${courier.username}"
+											th:text="${courier.fullName}">Genís
 											Esteve i Prats</option>
 										<option th:remove="all">Raul Casanova i Ferrer</option>
 									</select>
@@ -136,18 +126,18 @@
 								<label class="form-label g-2 col-md-2 p-1" for="priority"
 									th:text="#{dialogs.shipment.assign.priority}">Priority</label>
 								<div class="g-2 col-md-2">
-									<input type="number" id="priority" th:field="*{priority}"
-										class="form-control" th:errorclass="'is-invalid'"
+									<input type="number" id="priority" th:field="*{priority}" class="form-control"
+										th:errorclass="'is-invalid'"
 										th:min="${T(cat.institutmarianao.shipments.model.Assignment).MIN_PRIORITAT}"
-										th:max="${T(cat.institutmarianao.shipments.model.Assignment).MAX_PRIORITAT}" value="1">
+										th:max="${T(cat.institutmarianao.shipments.model.Assignment).MAX_PRIORITAT}"
+										value="1">
 								</div>
 							</div>
 
 						</div>
 
 						<div class="modal-footer">
-							<button type="button" class="btn btn-light"
-								data-bs-dismiss="modal"
+							<button type="button" class="btn btn-light" data-bs-dismiss="modal"
 								th:text="#{dialogs.shipment.assign.cancel.button}">Cancel</button>
 							<button type="submit" class="btn btn-warning">
 								<i class="bi bi-person-bounding-box"> </i>
@@ -167,26 +157,26 @@
 			const assignShipmentDialog = document.getElementById('assignShipmentDialog')
 			if (assignShipmentDialog) {
 				assignShipmentDialog.addEventListener('show.bs.modal', event => {
-			    // Button that triggered the modal
-			    const button = event.relatedTarget
-			    // Extract info from data-bs-* attributes
-			    const shipmentId = button.getAttribute('data-bs-shipmentId')
-			    // If necessary, you could initiate an Ajax request here
-			    // and then do the updating in a callback.
-	
-			    // Update the modal's content.
-			    const shipmentIdInput = assignShipmentDialog.querySelector('#shipmentId')
-	
-			    shipmentIdInput.value = shipmentId
-			  })
+					// Button that triggered the modal
+					const button = event.relatedTarget
+					// Extract info from data-bs-* attributes
+					const shipmentId = button.getAttribute('data-bs-shipmentId')
+					// If necessary, you could initiate an Ajax request here
+					// and then do the updating in a callback.
+
+					// Update the modal's content.
+					const shipmentIdInput = assignShipmentDialog.querySelector('#shipmentId')
+
+					shipmentIdInput.value = shipmentId
+				})
 			}
 		</script>
 
 	</div>
 
 	<!-- Deliver shipment dialog -->
-	<button type="button" class="btn btn-success" data-bs-toggle="modal"
-		data-bs-target="#deliverShipmentDialog" data-bs-shipmentId="1" data-bs-trackingId="6530554419">Deliver shipment dialog</button>
+	<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#deliverShipmentDialog"
+		data-bs-shipmentId="1" data-bs-trackingId="6530554419">Deliver shipment dialog</button>
 
 	<div th:fragment="deliver_shipment_dialog">
 
@@ -194,19 +184,16 @@
 
 			<div class="modal-dialog">
 
-				<form action="#" th:action="@{/shipments/deliver}" method="post"
-					th:object="${delivery}">
+				<form action="#" th:action="@{/shipments/deliver}" method="post" th:object="${delivery}">
 
 					<div class="modal-content">
 
 						<div class="modal-header" style="padding: 35px 50px;">
-							<h4 class="modal-title"
-								th:utext="#{dialogs.shipment.deliver.title}">Deliver</h4>
+							<h4 class="modal-title" th:utext="#{dialogs.shipment.deliver.title}">Deliver</h4>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 						</div>
 
-						<div class="modal-body form-horizontal"
-							style="padding: 40px 50px;">
+						<div class="modal-body form-horizontal" style="padding: 40px 50px;">
 							<input type="hidden" th:field="*{performer}" />
 							<input id="shipmentId" type="hidden" th:field="*{shipmentId}" />
 
@@ -214,8 +201,7 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="button" class="btn btn-light"
-								data-bs-dismiss="modal"
+							<button type="button" class="btn btn-light" data-bs-dismiss="modal"
 								th:text="#{dialogs.shipment.deliver.cancel.button}">Cancel</button>
 							<button type="submit" class="btn btn-success">
 								<i class="bi bi-person-bounding-box"> </i>
@@ -238,25 +224,25 @@
 		<script>
 			const deliverShipmentDialog = document.getElementById('deliverShipmentDialog')
 			if (deliverShipmentDialog) {
-			  deliverShipmentDialog.addEventListener('show.bs.modal', event => {
-			    // Button that triggered the modal
-			    const button = event.relatedTarget
-			    // Extract info from data-bs-* attributes
-			    const shipmentId = button.getAttribute('data-bs-shipmentId')
-			    const trackingId = button.getAttribute('data-bs-trackingId')
-			    
-			    // If necessary, you could initiate an Ajax request here
-			    // and then do the updating in a callback.
-	
-			    // Update the modal's content.
-			    const modalBodyMessage = deliverShipmentDialog.querySelector('.modal-body p')
-	
-			    modalBodyMessage.innerHTML = deliverShipmentDialogMsg.replace('{0}', shipmentId).replace('{1}', trackingId)
-			    
-			    const shipmentIdInput = deliverShipmentDialog.querySelector('#shipmentId')
-			    
-			    shipmentIdInput.value = shipmentId
-			  })
+				deliverShipmentDialog.addEventListener('show.bs.modal', event => {
+					// Button that triggered the modal
+					const button = event.relatedTarget
+					// Extract info from data-bs-* attributes
+					const shipmentId = button.getAttribute('data-bs-shipmentId')
+					const trackingId = button.getAttribute('data-bs-trackingId')
+
+					// If necessary, you could initiate an Ajax request here
+					// and then do the updating in a callback.
+
+					// Update the modal's content.
+					const modalBodyMessage = deliverShipmentDialog.querySelector('.modal-body p')
+
+					modalBodyMessage.innerHTML = deliverShipmentDialogMsg.replace('{0}', shipmentId).replace('{1}', trackingId)
+
+					const shipmentIdInput = deliverShipmentDialog.querySelector('#shipmentId')
+
+					shipmentIdInput.value = shipmentId
+				})
 			}
 		</script>
 

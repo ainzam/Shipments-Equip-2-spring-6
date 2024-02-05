@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://wwww.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="https://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/template :: head}">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css"/>
-<title>New user</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" />
+	<title>New user</title>
 </head>
+
 <body onload="roleFields()">
 	<script th:src="@{/js/user.js}" src="../static/js/user.js"></script>
 
@@ -24,28 +20,23 @@
 		<header class="jumbotron" th:replace="~{fragments/template :: header}">
 			Shipments Header </header>
 
-		<nav class="navbar navbar-default"
-			th:replace="~{fragments/template :: navbar}">Navbar</nav>
+		<nav class="navbar navbar-default" th:replace="~{fragments/template :: navbar}">Navbar</nav>
 
-		<section class="card my-1"
-			th:replace="~{fragments/template :: heading}">Heading</section>
+		<section class="card my-1" th:replace="~{fragments/template :: heading}">Heading</section>
 
-		<form action="#" th:action="@{#ctx.springRequestContext.requestUri}"
-			method="post" th:object="${userForm}" class="form-horizontal">
+		<form action="#" th:action="@{#ctx.springRequestContext.requestUri}" method="post" th:object="${userForm}"
+			class="form-horizontal">
 
 			<div class="container px-4">
 
 				<div class="row">
 					<div class="g-2 col-md-8">
-						<div th:if="${#fields.hasAnyErrors()}"
-							class="row alert alert-danger alert-dismissible  p-1"
+						<div th:if="${#fields.hasAnyErrors()}" class="row alert alert-danger alert-dismissible  p-1"
 							role="alert">
 
 							<ul>
-								<li th:each="err : ${#fields.detailedErrors()}"
-									th:class="${err.global} ? fst-italic">
-									<span
-										th:text="${err.global}? '*' : #{'user.'+${err.fieldName}}">
+								<li th:each="err : ${#fields.detailedErrors()}" th:class="${err.global} ? fst-italic">
+									<span th:text="${err.global}? '*' : #{'user.'+${err.fieldName}}">
 										Username </span>: <span th:utext="${err.message}">el tamaño debe
 										estar entre 2 y 25</span>
 								</li>
@@ -57,19 +48,15 @@
 
 				<div class="row">
 
-					<label class="form-label g-2 col-md-1 p-1" for="role"
-						th:text="#{user.role}">Role</label>
+					<label class="form-label g-2 col-md-1 p-1" for="role" th:text="#{user.role}">Role</label>
 					<div class="g-2 col-md-3">
-						<input th:if="${edit}" class="form-control"
-							th:value="#{'user.role.' + *{role}}" readonly="readonly"
-							value="Receptionist" />
-						<input th:if="${edit}" id="role" type="hidden" th:field="*{role}"
-							th:value="*{role}" />
-						<select th:if="not ${edit}" id="role" th:field="*{role}"
-							class="form-select" th:errorclass="'is-invalid'"
-							onchange="roleFields()">
-							<option th:each="role : ${T(cat.institutmarianao.shipments.model.User.Role).values()}" th:value="${role}"
-								th:text="#{'user.role.' +${role}}">Receptionist</option>
+						<input th:if="${edit}" class="form-control" th:value="#{'user.role.' + *{role}}"
+							readonly="readonly" value="Receptionist" />
+						<input th:if="${edit}" id="role" type="hidden" th:field="*{role}" th:value="*{role}" />
+						<select th:if="not ${edit}" id="role" th:field="*{role}" class="form-select"
+							th:errorclass="'is-invalid'" onchange="roleFields()">
+							<option th:each="role : ${T(cat.institutmarianao.shipments.model.User.Role).values()}"
+								th:value="${role}" th:text="#{'user.role.' +${role}}">Receptionist</option>
 							<option th:remove="all">Logistic manager</option>
 							<option th:remove="all">Courier</option>
 						</select>
@@ -78,11 +65,11 @@
 					<label class="form-label g-2 col-md-1 p-1" for="extension"
 						th:text="#{user.extension}">Extension</label>
 					<div class="g-2 col-md-3">
-						<input type="number" id="extension" th:field="*{extension}"
-							class="form-control" th:errorclass="'is-invalid'" min="0"
+						<input type="number" id="extension" th:field="*{extension}" class="form-control"
+							th:errorclass="'is-invalid'" min="0"
 							th:max="${T(cat.institutmarianao.shipments.model.User).MAX_EXTENSION}"
-							th:placeholder="#{user.extension.placeholder}"
-							style="text-align: right" placeholder="2030" />
+							th:placeholder="#{user.extension.placeholder}" style="text-align: right"
+							placeholder="2030" />
 					</div>
 
 				</div>
@@ -92,11 +79,10 @@
 					<label class="form-label g-2 col-md-1 p-1" for="username"
 						th:text="#{user.username}">Username</label>
 					<div class="g-2 col-md-7">
-						<input th:if="${edit}" id="username" th:field="*{username}"
-							class="form-control" readonly="readonly" value="pedro" />
-						<input th:if="not ${edit}" id="username" th:field="*{username}"
-							class="form-control" th:errorclass="'is-invalid'"
-							th:placeholder="#{user.username.placeholder}"
+						<input th:if="${edit}" id="username" th:field="*{username}" class="form-control"
+							readonly="readonly" value="pedro" />
+						<input th:if="not ${edit}" id="username" th:field="*{username}" class="form-control"
+							th:errorclass="'is-invalid'" th:placeholder="#{user.username.placeholder}"
 							placeholder="Username" />
 					</div>
 
@@ -107,71 +93,59 @@
 					<label class="form-label g-2 col-md-1 p-1" for="password"
 						th:text="#{user.password}">Password</label>
 					<div class="g-2 col-md-3">
-						<input type="password" id="password" th:field="*{password}"
-							class="form-control" th:errorclass="'is-invalid'"
-							th:placeholder="#{user.password.placeholder}"
+						<input type="password" id="password" th:field="*{password}" class="form-control"
+							th:errorclass="'is-invalid'" th:placeholder="#{user.password.placeholder}"
 							placeholder="Password" />
 					</div>
 
-					<label class="form-label g-2 col-md-1 p-1" for="verify"
-						th:text="#{user.verify}">Verify</label>
+					<label class="form-label g-2 col-md-1 p-1" for="verify" th:text="#{user.verify}">Verify</label>
 					<div class="g-2 col-md-3">
-						<input type="password" id="verify" th:field="*{verify}"
-							class="form-control" th:errorclass="'is-invalid'"
-							th:placeholder="#{user.verify.placeholder}" placeholder="Verify" />
+						<input type="password" id="verify" th:field="*{verify}" class="form-control"
+							th:errorclass="'is-invalid'" th:placeholder="#{user.verify.placeholder}"
+							placeholder="Verify" />
 					</div>
 
 				</div>
 
 				<div class="row">
 
-					<label class="form-label g-2 col-md-1 p-1" for="fullName"
-						th:text="#{user.fullName}">Full name</label>
+					<label class="form-label g-2 col-md-1 p-1" for="fullName" th:text="#{user.fullName}">Full
+						name</label>
 					<div class="g-2 col-md-7">
-						<input id="fullName" th:field="*{fullName}" class="form-control"
-							th:errorclass="'is-invalid'"
-							th:placeholder="#{user.fullName.placeholder}"
-							placeholder="Full name" />
+						<input id="fullName" th:field="*{fullName}" class="form-control" th:errorclass="'is-invalid'"
+							th:placeholder="#{user.fullName.placeholder}" placeholder="Full name" />
 					</div>
 
 				</div>
 
-				<div id="receptionistFields"
-					class="row">
+				<div id="receptionistFields" class="row">
 
-					<label class="form-label g-2 col-md-1 p-1" for="office"
-						th:text="#{user.office}">Office</label>
+					<label class="form-label g-2 col-md-1 p-1" for="office" th:text="#{user.office}">Office</label>
 					<div class="g-2 col-md-3">
 
-						<select id="office" th:field="*{officeId}" class="form-select"
-							th:errorclass="'is-invalid'">
-							<option th:each="office : ${offices}" th:value="${office.id}"
-								th:text="${office.name}">Mestre Candi</option>
+						<select id="office" th:field="*{officeId}" class="form-select" th:errorclass="'is-invalid'">
+							<option th:each="office : ${offices}" th:value="${office.id}" th:text="${office.name}">
+								Mestre Candi</option>
 							<option th:remove="all">Cotonat</option>
 							<option th:remove="all">Pedraforca</option>
 						</select>
 					</div>
 
-					<label class="form-label g-2 col-md-1 p-1" for="place"
-						th:text="#{user.place}">Place</label>
+					<label class="form-label g-2 col-md-1 p-1" for="place" th:text="#{user.place}">Place</label>
 					<div class="g-2 col-md-3">
-						<input id="place" th:field="*{place}" class="form-control"
-							th:errorclass="'is-invalid'"
+						<input id="place" th:field="*{place}" class="form-control" th:errorclass="'is-invalid'"
 							th:placeholder="#{user.place.placeholder}" placeholder="Place" />
 					</div>
 
 				</div>
 
-				<div id="courierFields"
-					class="row">
+				<div id="courierFields" class="row">
 
-					<label class="form-label g-2 col-md-1 p-1" for="company"
-						th:text="#{user.company}">Company</label>
+					<label class="form-label g-2 col-md-1 p-1" for="company" th:text="#{user.company}">Company</label>
 					<div class="g-2 col-md-7">
-						<select id="company" th:field="*{companyId}" class="form-select"
-							th:errorclass="'is-invalid'">
-							<option th:each="company : ${companies}" th:value="${company.id}"
-								th:text="${company.name}">Correos</option>
+						<select id="company" th:field="*{companyId}" class="form-select" th:errorclass="'is-invalid'">
+							<option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}">
+								Correos</option>
 							<option th:remove="all">SEUR</option>
 							<option th:remove="all">UPS</option>
 						</select>
@@ -181,18 +155,18 @@
 
 				<div class="row">
 					<div class="g-2 col-md-1">
-						<input th:if="${edit}" class="btn btn-success" type="submit"
-							th:value="#{user.update}" value="Update" />
-						<input th:if="not ${edit}" class="btn btn-success" type="submit"
-							th:value="#{user.add.new}" value="Add" />
+						<input th:if="${edit}" class="btn btn-success" type="submit" th:value="#{user.update}"
+							value="Update" />
+						<input th:if="not ${edit}" class="btn btn-success" type="submit" th:value="#{user.add.new}"
+							value="Add" />
 					</div>
 				</div>
 
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			</div>
 		</form>
 	</section>
 
 </body>
+
 </html>

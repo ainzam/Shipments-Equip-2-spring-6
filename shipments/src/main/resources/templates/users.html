@@ -1,44 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://wwww.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="https://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/template :: head}">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css"/>
-<title>Users</title>
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" />
+	<title>Users</title>
 </head>
+
 <body>
 	<div th:replace="~{fragments/dialogs :: remove_user_dialog}"></div>
 
-	<div th:if="${param.removeerror != null}"
-		class="alert alert-danger alert-dismissible" role="alert">
+	<div th:if="${param.removeerror != null}" class="alert alert-danger alert-dismissible" role="alert">
 		<span th:text="#{users.remove.error(${param.removeerror})}"></span>
-		<button type="button" class="btn-close" data-bs-dismiss="alert"
-			aria-label="Close"></button>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 
 	<section class="container">
 		<header class="jumbotron" th:replace="~{fragments/template :: header}">
 			Shipments Header </header>
 
-		<nav class="navbar navbar-default"
-			th:replace="~{fragments/template :: navbar}">Navbar</nav>
+		<nav class="navbar navbar-default" th:replace="~{fragments/template :: navbar}">Navbar</nav>
 
-		<section class="card my-1"
-			th:replace="~{fragments/template :: heading}">Heading</section>
+		<section class="card my-1" th:replace="~{fragments/template :: heading}">Heading</section>
 
-		<table
-			class="table table-striped table-bordered table-condensed table-responsive">
+		<table class="table table-striped table-bordered table-condensed table-responsive">
 			<thead>
 				<tr>
 					<th th:text="#{users.table.head.num}">#</th>
@@ -47,8 +38,7 @@
 					<th th:text="#{users.table.head.full.name}">Full name</th>
 					<th th:text="#{users.table.head.ext}">Ext</th>
 					<th th:text="#{users.table.head.location}">Location</th>
-					<th sec:authorize="hasRole('LOGISTICS_MANAGER')"
-						th:text="#{users.table.head.delete}">Delete</th>
+					<th sec:authorize="hasRole('LOGISTICS_MANAGER')" th:text="#{users.table.head.delete}">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,13 +49,12 @@
 					<td th:text="${user.fullName}">Àlex Macia Pérez</td>
 					<td th:text="${user.extension}">3515</td>
 					<td
-						th:text="(${#strings.equals(user.role, 'COURIER')} ? #{users.table.body.external} + ' ' : '') + ${user.location}">Mestre
+						th:text="(${#strings.equals(user.role, 'COURIER')} ? #{users.table.body.external} + ' ' : '') + ${user.location}">
+						Mestre
 						Candi (L15)</td>
-					<td sec:authorize="hasRole('LOGISTICS_MANAGER')"
-						class="text-center">
-						<button sec:authorize="hasRole('LOGISTICS_MANAGER')" type="button"
-							class="btn btn-danger btn-sm" data-bs-toggle="modal"
-							data-bs-target="#removeUserDialog"
+					<td sec:authorize="hasRole('LOGISTICS_MANAGER')" class="text-center">
+						<button sec:authorize="hasRole('LOGISTICS_MANAGER')" type="button" class="btn btn-danger btn-sm"
+							data-bs-toggle="modal" data-bs-target="#removeUserDialog"
 							th:data-bs-username="${user.username}">
 							<i class="bi bi-person-x"></i>
 						</button>
@@ -101,4 +90,5 @@
 		</table>
 	</section>
 </body>
+
 </html>

@@ -1,128 +1,101 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://wwww.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="https://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../static/css/main.css" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../../static/css/main.css" />
 
-<title>Forms</title>
+	<title>Forms</title>
 </head>
 
 <body>
 	<div th:fragment="address(formObject)">
 		<div class="row">
-			<h5 class="form-label g-2 col-md-12 p-1 bg-light"
-				th:text="#{'forms.'+ ${formObject}}">Person address</h5>
+			<h5 class="form-label g-2 col-md-12 p-1 bg-light" th:text="#{'forms.'+ ${formObject}}">Person address</h5>
 		</div>
 		<div class="row">
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Name'" th:text="#{forms.address.name}">Name</label>
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Name'"
+				th:text="#{forms.address.name}">Name</label>
 			<div class="g-2 col-md-3">
-				<input th:id="${formObject} + 'Name'"
-					th:field="*{__${formObject}__.name}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.name.placeholder}"
+				<input th:id="${formObject} + 'Name'" th:field="*{__${formObject}__.name}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.name.placeholder}"
 					placeholder="Name" />
 			</div>
 
 		</div>
 		<div class="row">
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Street'" th:text="#{forms.address.street}">Address</label>
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Street'"
+				th:text="#{forms.address.street}">Address</label>
 			<div class="g-2 col-md-3">
-				<input th:id="${formObject} + 'Street'"
-					th:field="*{__${formObject}__.street}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.street.placeholder}"
+				<input th:id="${formObject} + 'Street'" th:field="*{__${formObject}__.street}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.street.placeholder}"
 					placeholder="Street" />
 			</div>
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Street'" th:text="#{forms.address.number}">Num.</label>
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Street'"
+				th:text="#{forms.address.number}">Num.</label>
 			<div class="g-2 col-md-1">
-				<input th:id="${formObject} + 'Number'"
-					th:field="*{__${formObject}__.number}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.number.placeholder}"
+				<input th:id="${formObject} + 'Number'" th:field="*{__${formObject}__.number}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.number.placeholder}"
 					placeholder="Number" />
 			</div>
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Floor'" th:text="#{forms.address.floor}">Floor</label>
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Floor'"
+				th:text="#{forms.address.floor}">Floor</label>
 			<div class="g-2 col-md-1">
-				<input th:id="${formObject} + 'Floor'"
-					th:field="*{__${formObject}__.floor}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.floor.placeholder}"
+				<input th:id="${formObject} + 'Floor'" th:field="*{__${formObject}__.floor}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.floor.placeholder}"
 					placeholder="Floor" />
 			</div>
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Door'" th:text="#{forms.address.door}">Door</label>
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Door'"
+				th:text="#{forms.address.door}">Door</label>
 			<div class="g-2 col-md-1">
-				<input th:id="${formObject} + 'Door'"
-					th:field="*{__${formObject}__.door}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.door.placeholder}"
+				<input th:id="${formObject} + 'Door'" th:field="*{__${formObject}__.door}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.door.placeholder}"
 					placeholder="Number" />
 			</div>
 
 		</div>
 		<div class="row">
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Street'" th:text="#{forms.address.city}">City</label>
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Street'"
+				th:text="#{forms.address.city}">City</label>
 			<div class="g-2 col-md-2">
-				<input th:id="${formObject} + 'City'"
-					th:field="*{__${formObject}__.city}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.city.placeholder}"
+				<input th:id="${formObject} + 'City'" th:field="*{__${formObject}__.city}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.city.placeholder}"
 					placeholder="City" />
 			</div>
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Street'"
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Street'"
 				th:text="#{forms.address.province}">Province</label>
 			<div class="g-2 col-md-2">
-				<input th:id="${formObject} + 'Province'"
-					th:field="*{__${formObject}__.province}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.province.placeholder}"
+				<input th:id="${formObject} + 'Province'" th:field="*{__${formObject}__.province}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.province.placeholder}"
 					placeholder="Province" />
 			</div>
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Floor'"
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Floor'"
 				th:text="#{forms.address.postalCode}">Post Code</label>
 			<div class="g-2 col-md-1">
-				<input th:id="${formObject} + 'PostalCode'"
-					th:field="*{__${formObject}__.postalCode}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.postalCode.placeholder}"
-					placeholder="Post Code" />
+				<input th:id="${formObject} + 'PostalCode'" th:field="*{__${formObject}__.postalCode}"
+					class="form-control" th:errorclass="'is-invalid'"
+					th:placeholder="#{forms.address.postalCode.placeholder}" placeholder="Post Code" />
 			</div>
 
-			<label class="form-label g-2 col-md-1 p-1"
-				th:for="${formObject} + 'Door'" th:text="#{forms.address.country}">Country</label>
+			<label class="form-label g-2 col-md-1 p-1" th:for="${formObject} + 'Door'"
+				th:text="#{forms.address.country}">Country</label>
 			<div class="g-2 col-md-2">
-				<input th:id="${formObject} + 'Country'"
-					th:field="*{__${formObject}__.country}" class="form-control"
-					th:errorclass="'is-invalid'"
-					th:placeholder="#{forms.address.country.placeholder}"
+				<input th:id="${formObject} + 'Country'" th:field="*{__${formObject}__.country}" class="form-control"
+					th:errorclass="'is-invalid'" th:placeholder="#{forms.address.country.placeholder}"
 					placeholder="Country" />
 			</div>
 
