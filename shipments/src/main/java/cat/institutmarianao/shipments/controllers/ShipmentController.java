@@ -1,5 +1,7 @@
 package cat.institutmarianao.shipments.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,7 @@ import cat.institutmarianao.shipments.model.Delivery;
 import cat.institutmarianao.shipments.model.Shipment;
 import cat.institutmarianao.shipments.model.Shipment.Status;
 import cat.institutmarianao.shipments.model.User;
+import cat.institutmarianao.shipments.model.forms.ShipmentsFilter;
 import cat.institutmarianao.shipments.services.ShipmentService;
 import cat.institutmarianao.shipments.services.UserService;
 
@@ -41,13 +44,12 @@ public class ShipmentController {
 		return (User) userService.loadUserByUsername(username);
 	}
 
-	@GetMapping("/new")
-	public ModelAndView newShipment(@ModelAttribute("user") User user) {
-
-		// TODO - New shipment
-
-		return null;
-	}
+    @GetMapping("/new")
+    public ModelAndView newShipment(@ModelAttribute("user") User user) {
+        ModelAndView modelAndView = new ModelAndView("newShipmentForm");
+        modelAndView.addObject("shipment", new Shipment());
+        return modelAndView;
+    }
 
 	@PostMapping("/new")
 	public String submitNewShipment(@Validated Shipment shipment, BindingResult result, ModelMap modelMap) {
@@ -60,8 +62,6 @@ public class ShipmentController {
 	@GetMapping("/list/{shipment-status}")
 	public ModelAndView allShipmentsList(@ModelAttribute("user") User user,
 			@PathVariable("shipment-status") Status shipmentStatus) {
-
-		// TODO - Retrieve all shipments by status
 
 		return null;
 	}

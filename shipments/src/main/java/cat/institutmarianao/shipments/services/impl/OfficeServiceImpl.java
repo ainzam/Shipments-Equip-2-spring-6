@@ -26,8 +26,6 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public Office getById(Long id) {
         final String baseUri = webServiceHost + ":" + webServicePort + "/offices/get/by/id/{id}";
-
-        // Ajusta este código según la estructura de respuesta del servicio web
         Office office = restTemplate.getForObject(baseUri, Office.class, id);
         return office;
     }
@@ -35,8 +33,6 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     public List<Office> getAllOffices() {
         final String uri = webServiceHost + ":" + webServicePort + "/offices/find/all";
-
-        // Ajusta este código según la estructura de respuesta del servicio web
         Office[] officesArray = restTemplate.getForObject(uri, Office[].class);
         return Arrays.asList(officesArray);
     }
