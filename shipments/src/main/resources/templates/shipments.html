@@ -1,63 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://wwww.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/template :: head}">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <link rel="stylesheet" th:href="@{/css/main.css}" href="../static/css/main.css" />
-
   <title>Shipments</title>
 </head>
 
 <body>
-
   <section class="container">
-
     <header class="jumbotron" th:replace="~{fragments/template :: header}">
       Shipments Header
     </header>
-
     <nav class="navbar navbar-default" th:replace="~{fragments/template :: navbar}">
       Navbar
     </nav>
-
     <section class="card my-1" th:replace="~{fragments/template :: heading}">
       Heading
     </section>
-
     <table class="table table-striped table-bordered table-condensed table-responsive">
       <thead>
         <tr>
-          <th scope="col" th:text="#{users.table.head.num}">#</th>
-          <th scope="col" th:text="#{users.table.head.tracking}">Tracking number</th>
-          <th scope="col" th:text="#{users.table.head.reception}">Reception</th>
-          <th scope="col" th:text="#{users.table.head.receptionist}">Receptionist</th>
-          <th scope="col" th:text="#{users.table.head.priority}">Priority</th>
-          <th scope="col" th:text="#{users.table.head.courier}">Courier</th>
-          <th scope="col" th:text="#{users.table.head.category}">Category</th>
-          <th scope="col" th:text="#{users.table.head.note}">Note</th>
-          </tr>
+          <th scope="col" th:text="#{shipments.table.head.num}">#</th>
+          <th scope="col" th:text="#{shipments.table.head.tracking.num}">Tracking number</th>
+          <th scope="col" th:text="#{shipments.table.head.reception}">Reception</th>
+          <th scope="col" th:text="#{shipments.table.head.receptionist}">Receptionist</th>
+          <th scope="col" th:text="#{shipments.table.head.priority}">Priority</th>
+          <th scope="col" th:text="#{shipments.table.head.courier}">Courier</th>
+          <th scope="col" th:text="#{shipments.table.head.category}">Category</th>
+          <th scope="col" th:text="#{shipments.table.head.note}">Note</th>
+        </tr>
       </thead>
       <tbody>
-        <tr th:each="shipment: ${shipments}">
+        <tr th:each="shipment, iterStat : ${shipments}">
+          <td th:text="${iterStat.count}">1</td>
           <td th:text="${shipment.trackingNumber}">123456</td>
           <td th:text="${shipment.receptionDate}">2023-10-26 15:00</td>
           <td th:text="${shipment.receptionist}">John Doe</td>
           <td th:text="${shipment.priority}">3</td>
           <td th:text="${shipment.courier}">Acme Delivery</td>
           <td th:text="${shipment.category}">PARTICULAR</td>
-          <td th:text="${shipment.note}">Lorem ipsum dolor sit amet...</td
-          </tr>
-        </tbody>
+          <td th:text="${shipment.note}">Lorem ipsum dolor sit amet...</td>
+        </tr>
+      </tbody>
     </table>
-
   </section>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>
