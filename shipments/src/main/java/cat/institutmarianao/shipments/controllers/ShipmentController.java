@@ -80,7 +80,9 @@ public class ShipmentController {
         model.put("user", user);
         model.put("shipments", shipments);
         model.put("filter", filter);
-
+       
+        model.put("shipmentStatus", shipmentStatus.toString());
+        
         return new ModelAndView("shipments", model);
     }
 
