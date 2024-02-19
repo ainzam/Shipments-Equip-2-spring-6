@@ -101,6 +101,6 @@ public class ShipmentController {
 		
 		shipmentService.tracking(delivery);
 		
-		return null;
+		return "redirect:/shipments/list/IN_PROCESS";
 	}
 }
