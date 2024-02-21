@@ -33,6 +33,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(baseUri)
                 .queryParam("status", shipmentStatus.getStatus())
+                .queryParam("receivedBy", shipmentStatus.getReceptionist())
                 .queryParam("category", shipmentStatus.getCategory());
 
    

@@ -70,19 +70,31 @@ public class ShipmentController {
 
     @GetMapping("/list/{shipment-status}")
     public ModelAndView allShipmentsList(@ModelAttribute("user") User user,
-                                      @PathVariable("shipment-status") Status shipmentStatus) {
-    	
+                                        @PathVariable("shipment-status") Status shipmentStatus) {
+
         ShipmentsFilter filter = new ShipmentsFilter();
+        Assignment assignment = new Assignment();
         filter.setStatus(shipmentStatus);
-        List<Shipment> shipments = shipmentService.filterShipments(filter);
+
+        List<Shipment> shipments;
+        switch (user.getRole()) {
+            case RECEPTIONIST:
+                filter.setReceptionist(user.getUsername());
+                shipments = shipmentService.filterShipments(filter);
+                break;
+            case LOGISTICS_MANAGER:
+                shipments = shipmentService.filterShipments(filter);
+                break;
+            default:
+                return new ModelAndView("redirect:/error");
+        }
 
         Map<String, Object> model = new HashMap<>();
         model.put("user", user);
         model.put("shipments", shipments);
-        model.put("filter", filter);
-       
         model.put("shipmentStatus", shipmentStatus.toString());
-        
+        model.put("assignment", assignment);
+
         return new ModelAndView("shipments", model);
     }
 
