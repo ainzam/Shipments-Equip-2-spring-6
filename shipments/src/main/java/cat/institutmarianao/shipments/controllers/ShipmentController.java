@@ -1,10 +1,7 @@
 package cat.institutmarianao.shipments.controllers;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Date;
-import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -74,9 +71,10 @@ public class ShipmentController {
 
         ShipmentsFilter filter = new ShipmentsFilter();
         Assignment assignment = new Assignment();
+        Delivery delivery = new Delivery();
         filter.setStatus(shipmentStatus);
 
-        List<Shipment> shipments;
+        List<Shipment> shipments = null;
         switch (user.getRole()) {
             case RECEPTIONIST:
                 filter.setReceptionist(user.getUsername());
@@ -85,18 +83,23 @@ public class ShipmentController {
             case LOGISTICS_MANAGER:
                 shipments = shipmentService.filterShipments(filter);
                 break;
+            case COURIER:
+                filter.setCourierAssigned(user.getUsername());
+                shipments = shipmentService.filterShipments(filter);
             default:
-                return new ModelAndView("redirect:/error");
+                return null;
         }
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("user", user);
-        model.put("shipments", shipments);
-        model.put("shipmentStatus", shipmentStatus.toString());
-        model.put("assignment", assignment);
+        ModelAndView modelAndView = new ModelAndView("shipments");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("shipments", shipments);
+        modelAndView.addObject("shipmentStatus", shipmentStatus.toString());
+        modelAndView.addObject("assignment", assignment);
+        modelAndView.addObject("delivery", delivery);
 
-        return new ModelAndView("shipments", model);
+        return modelAndView;
     }
+
 
 	@PostMapping("/assign")
 	public String assignShipment(@Validated Assignment assignment) {

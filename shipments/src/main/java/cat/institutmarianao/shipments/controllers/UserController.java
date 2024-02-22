@@ -38,10 +38,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	// @Autowired
+	@Autowired
 	private OfficeService officeService;
 
-	// @Autowired
+	@Autowired
 	private CompanyService companyService;
 
 	@ModelAttribute("user")

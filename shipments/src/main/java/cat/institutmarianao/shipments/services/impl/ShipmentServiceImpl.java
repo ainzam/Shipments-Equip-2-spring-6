@@ -33,16 +33,23 @@ public class ShipmentServiceImpl implements ShipmentService {
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(baseUri)
                 .queryParam("status", shipmentStatus.getStatus())
-                .queryParam("receivedBy", shipmentStatus.getReceptionist())
                 .queryParam("category", shipmentStatus.getCategory());
 
-   
+        if (shipmentStatus.getReceptionist() != null) {
+            builder.queryParam("receivedBy", shipmentStatus.getReceptionist());
+        }
+
+        if (shipmentStatus.getCourierAssigned() != null) {
+            builder.queryParam("courierAssigned", shipmentStatus.getCourierAssigned());
+        }
+
         ResponseEntity<Shipment[]> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, null, Shipment[].class);
 
         Shipment[] shipmentsArray = response.getBody();
         
         return Arrays.asList(shipmentsArray);
     }
+
 
     
     @Override
