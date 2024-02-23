@@ -10,9 +10,6 @@
 </head>
 
 <body>
-  <div th:replace="~{fragments/dialogs :: assign_shipment_dialog}"></div>
-  <div th:replace="~{fragments/dialogs :: deliver_shipment_dialog}"></div>
-  
   <section class="container">
     <header class="jumbotron" th:replace="~{fragments/template :: header}">
       Shipments Header
@@ -38,8 +35,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="shipment, iterStat : ${shipments}">
-          <td th:text="${iterStat.count}">1</td>
+        <tr th:each="shipment, iStat : ${shipments}">
+          <td th:text="${iStat.index+1}">1</td>
           <td th:text="${shipment.trackingNumber}">123456</td>
           <td th:text="${shipment.receptionDate}">2023-10-26 15:00</td>
           <td th:text="${shipment.receptionist}">John Doe</td>
@@ -49,13 +46,13 @@
           <td th:text="${shipment.note}">Lorem ipsum dolor sit amet...</td>
 			<td th:if="${shipmentStatus == 'PENDING'}">
 			    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#assignShipmentDialog"
-			            data-bs-shipmentId="${shipment.id}" sec:authorize="hasAnyRole('RECEPTIONIST', 'LOGISTICS_MANAGER')">
+			            th:data-bs-shipmentId="${shipment.id}" sec:authorize="hasAnyRole('RECEPTIONIST', 'LOGISTICS_MANAGER')">
 			        <i class="bi bi-person-bounding-box"> </i>
 			    </button>
 			</td>
 			<td th:if="${shipmentStatus == 'IN_PROCESS'}" sec:authorize="hasAnyRole('COURIER')">
 			    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#deliverShipmentDialog"
-			            data-bs-shipmentId="${shipment.id}" data-bs-trackingId="${shipment.trackingNumber}" sec:authorize="hasAnyRole('COURIER')">
+			            th:data-bs-shipmentId="${shipment.id}" th:data-bs-trackingId="${shipment.trackingNumber}" sec:authorize="hasAnyRole('COURIER')">
 			        <i class="bi bi-truck-front-fill"> </i>
 			    </button>
 			</td>
@@ -63,6 +60,8 @@
       </tbody>
     </table>
   </section>
+  <div th:replace="~{fragments/dialogs :: assign_shipment_dialog}"></div>
+  <div th:replace="~{fragments/dialogs :: deliver_shipment_dialog}"></div>
 </body>
 
 </html>

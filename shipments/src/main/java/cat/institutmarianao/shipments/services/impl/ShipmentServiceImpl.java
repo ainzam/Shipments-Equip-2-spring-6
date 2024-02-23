@@ -15,6 +15,10 @@ import cat.institutmarianao.shipments.model.Shipment;
 import cat.institutmarianao.shipments.model.forms.ShipmentsFilter;
 import cat.institutmarianao.shipments.services.ShipmentService;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
 
@@ -58,10 +62,17 @@ public class ShipmentServiceImpl implements ShipmentService {
         return restTemplate.postForObject(uri, shipment, Shipment.class);
     }
 
+    
     @Override
     public Action tracking(Action action) {
         final String uri = webServiceHost + ":" + webServicePort + "/shipments/find/tracking/by/id/" + action.getShipmentId();
-        return restTemplate.getForObject(uri, Action.class);
-    }
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
+        HttpEntity<Action> request = new HttpEntity<>(action, headers);
+
+        return restTemplate.postForObject(uri, request, Action.class);
+    }
+    
 }

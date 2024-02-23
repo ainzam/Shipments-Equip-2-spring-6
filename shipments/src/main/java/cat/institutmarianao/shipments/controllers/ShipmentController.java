@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import cat.institutmarianao.shipments.model.Assignment;
+import cat.institutmarianao.shipments.model.Courier;
 import cat.institutmarianao.shipments.model.Delivery;
 import cat.institutmarianao.shipments.model.Shipment;
 import cat.institutmarianao.shipments.model.Shipment.Status;
@@ -46,8 +47,12 @@ public class ShipmentController {
 
     @GetMapping("/new")
     public ModelAndView newShipment(@ModelAttribute("user") User user) {
+    	
+    	Shipment shipment = new Shipment();
+        shipment.setReceptionist(user.getUsername());
+    	
         ModelAndView modelAndView = new ModelAndView("shipment");
-        modelAndView.addObject("shipment", new Shipment());
+        modelAndView.addObject("shipment", shipment);
         return modelAndView;
     }
 
@@ -70,28 +75,42 @@ public class ShipmentController {
                                         @PathVariable("shipment-status") Status shipmentStatus) {
 
         ShipmentsFilter filter = new ShipmentsFilter();
+        
         Assignment assignment = new Assignment();
         Delivery delivery = new Delivery();
+        
+        
+        
         filter.setStatus(shipmentStatus);
 
         List<Shipment> shipments = null;
+        List<Courier> couries = null;
+        
         switch (user.getRole()) {
             case RECEPTIONIST:
                 filter.setReceptionist(user.getUsername());
                 shipments = shipmentService.filterShipments(filter);
+                couries = userService.getAllCourier();
+                assignment.setPerformer(user.getUsername());
                 break;
             case LOGISTICS_MANAGER:
                 shipments = shipmentService.filterShipments(filter);
+                couries = userService.getAllCourier();
+                assignment.setPerformer(user.getUsername());
                 break;
             case COURIER:
                 filter.setCourierAssigned(user.getUsername());
                 shipments = shipmentService.filterShipments(filter);
+                delivery.setPerformer(user.getUsername());
+                
             default:
-                return null;
+            	shipments = shipmentService.filterShipments(filter);
         }
+        
 
         ModelAndView modelAndView = new ModelAndView("shipments");
         modelAndView.addObject("user", user);
+        modelAndView.addObject("couriers", couries);
         modelAndView.addObject("shipments", shipments);
         modelAndView.addObject("shipmentStatus", shipmentStatus.toString());
         modelAndView.addObject("assignment", assignment);

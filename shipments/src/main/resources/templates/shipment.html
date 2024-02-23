@@ -21,7 +21,128 @@
 		<nav class="navbar navbar-default" th:replace="~{fragments/template :: navbar}">Navbar</nav>
 
 		<section class="card my-1" th:replace="~{fragments/template :: heading}">Heading</section>
+		
+		<form action="#" th:action="@{#ctx.springRequestContext.requestUri}" method="post" th:object="${shipment}" class="form-horizontal">
+			<div class="container px-4">
+				<div class="row">
+					<div class="g-2 col-md-8">
+						<div th:if="${#fields.hasAnyErrors()}" class="row alert alert-danger alert-dismissible  p-1"
+							role="alert">
 
+							<ul>
+								<li th:each="err : ${#fields.detailedErrors()}" th:class="${err.global} ? fst-italic">
+									<span th:text="${err.global}? '*' : #{'shipments.'+${err.fieldName}}">
+										Shipment </span>: <span th:utext="${err.message}">el tamaño debe
+										estar entre 2 y 25</span>
+								</li>
+							</ul>
+							<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					
+					<div class=""></div>
+				
+					<div class="col-3">
+                        <label for="trackingNumber" class="form-label" th:text="#{shipment.tracking.num}">Tracking
+                            #</label>
+                        <input type="number" class="form-control" id="trackingNumber" name="trackingNumber"
+                            th:field="*{trackingNumber}" min="1" th:placeholder="#{shipment.tacking.num.placeholder}" required>
+                    </div>
+
+                    <div class="col-3">
+                        <label for="receptionist" class="form-label"
+                            th:text="#{shipment.receptionist}">Receptionist</label>
+                        <input type="text" class="form-control" id="receptionist" name="receptionist"
+                            th:field="*{receptionist}" readonly>
+                    </div>
+
+                    <div class="col-3">
+                        <label for="priority" class="form-label"
+                            th:text="#{shipment.priority}">Priority</label>
+                        <input type="number" class="form-control" id="priority" name="priority" min="1" max="5"
+                            th:field="*{priority}" th:placeholder="#{shipment.priority.placeholder}" required>
+                    </div>
+
+						<div class="col-3">
+						    <label for="category" class="form-label">Categoría</label>
+						    <select class="form-select" id="category" name="category" th:field="*{category}" required>
+						        <option th:each="cat : ${T(cat.institutmarianao.shipments.model.Shipment.Category).values()}"
+						                th:value="${cat}" th:text="${cat}"></option>
+						    </select>
+						</div>
+				</div>
+				
+				<div class="row">
+					<div th:replace="~{fragments/forms :: address('sender')}">Sender</div>
+				</div>
+				<div class="row">
+					<div th:replace="~{fragments/forms :: address('recipient')}">Recipient</div>
+				</div>
+				
+                <div class="row">
+                    <h5 class="form-label g-2 col-md-12 p-1 bg-light"> others </h5>
+                </div>
+
+                <div class="row">
+                    <div class="row mt-3">
+                        <div class="col-2">
+                            <label for="weight" class="form-label">Weight</label>
+                            <input type="number" class="form-control" id="weight" name="weight" th:field="*{weight}"
+                                placeholder="Weight">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="height" class="form-label">Height</label>
+                            <input type="number" class="form-control" id="height" name="height" th:field="*{height}"
+                                placeholder="Height">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="width" class="form-label">Width</label>
+                            <input type="number" class="form-control" id="width" name="width" th:field="*{width}"
+                                placeholder="Width">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="length" class="form-label">Length</label>
+                            <input type="number" class="form-control" id="length" name="length" th:field="*{length}"
+                                placeholder="Length">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="express" class="form-label">Express</label>
+                            <input type="checkbox" class="form-check-input" id="express" name="express"
+                                th:field="*{express}">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="fragile" class="form-label">Fragile</label>
+                            <input type="checkbox" class="form-check-input" id="fragile" name="fragile"
+                                th:field="*{fragile}">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-12">
+                            <label for="note" class="form-label">Note</label>
+                            <textarea class="form-control" id="note" name="note" th:field="*{note}"
+                                placeholder="Note"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+				<div class="row">
+					<div class="col-md-12">
+						<button th:if="not ${edit}"type="submit" class="btn btn-primary" th:value="#{shipment.add.new}">boton</button>
+					</div>
+				</div>
+				
+			</div>
+		</form>
 	</section>
 
 </body>
